@@ -75,6 +75,7 @@
 @push('scripts')
     <script>
         $(function (){
+            console.log('jquery');
             let $chatInput = $(".chat-input");
             let $chatInputToolbar = $(".chat-input-toolbar");
             let $chatBody = $(".chat-body");
@@ -105,41 +106,41 @@
                 });
             });
 
-            $chatInput.keypress(function (e) {
-               let message = $(this).html();
-               if (e.which === 13 && !e.shiftKey) {
-                   $chatInput.html("");
-                   sendMessage(message);
-                   return false;
-               }
-            });
+            // $chatInput.keypress(function (e) {
+            //    let message = $(this).html();
+            //    if (e.which === 13 && !e.shiftKey) {
+            //        $chatInput.html("");
+            //        sendMessage(message);
+            //        return false;
+            //    }
+            // });
 
-            function sendMessage(message) {
-                let url = "{{ route('message.send-message') }}";
-                let form = $(this);
-                let formData = new FormData();
-                let token = "{{ csrf_token() }}";
+            // function sendMessage(message) {
+            //     let url = "{{ route('message.send-message') }}";
+            //     let form = $(this);
+            //     let formData = new FormData();
+            //     let token = "{{ csrf_token() }}";
 
-                formData.append('message', message);
-                formData.append('_token', token);
-                formData.append('receiver_id', friendId);
+            //     formData.append('message', message);
+            //     formData.append('_token', token);
+            //     formData.append('receiver_id', friendId);
 
-                appendMessageToSender(message);
+            //     appendMessageToSender(message);
 
-                $.ajax({
-                   url: url,
-                   type: 'POST',
-                   data: formData,
-                    processData: false,
-                    contentType: false,
-                    dataType: 'JSON',
-                   success: function (response) {
-                       if (response.success) {
-                           console.log(response.data);
-                       }
-                   }
-                });
-            }
+            //     $.ajax({
+            //        url: url,
+            //        type: 'POST',
+            //        data: formData,
+            //         processData: false,
+            //         contentType: false,
+            //         dataType: 'JSON',
+            //        success: function (response) {
+            //            if (response.success) {
+            //                console.log(response.data);
+            //            }
+            //        }
+            //     });
+            // }
 
             // function appendMessageToSender(message) {
             //     let name = '{{ $myInfo->name }}';
